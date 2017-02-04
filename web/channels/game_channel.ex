@@ -2,7 +2,7 @@ defmodule TicTacToe.GameChannel do
   use Phoenix.Channel
 
   def join("game:lobby", _message, socket) do
-    team = :x
+    team = Enum.random([:x, :o])
     {:ok, team, assign(socket, :team, team)}
   end
 
