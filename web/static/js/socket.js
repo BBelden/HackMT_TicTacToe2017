@@ -4,6 +4,7 @@
 // To use Phoenix channels, the first step is to import Socket
 // and connect at the socket path in "lib/my_app/endpoint.ex":
 import {Socket} from "phoenix"
+import $ from "jquery"
 
 let socket = new Socket("/socket", {params: {token: window.userToken}})
 
@@ -57,10 +58,21 @@ socket.connect()
 let channel = socket.channel("game:lobby", {})
 channel.join()
   .receive("ok", resp => {
+<<<<<<< HEAD
     console.log("Joined Team:", resp)
     document.getElementById('teamAssigned').innerHTML = resp.toUpperCase()
     document.getElementById('teamAssigned').className = "is" + resp.toUpperCase()
+=======
+    let teamName = resp.toUpperCase()
+    $('#teamAssigned').addClass(`is${teamName}`).html(teamName)
+>>>>>>> 64a5ffab4e771c5b0f4307d7e116baa185c9cc72
   })
   .receive("error", resp => { console.log("Unable to join", resp) })
+
+$('.board .button').on('click', function(evt) {
+  let selectedIdx = $(evt.currentTarget).data('idx')
+  console.log(selectedIdx)
+  channel.push("vote", {vote: selectedIdx})
+})
 
 export default socket
