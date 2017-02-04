@@ -19,12 +19,12 @@ defmodule TicTacToe.Worker do
   def init(state) do
     put_value(:time_remaining, 15)
     :timer.apply_interval(:timer.seconds(1), TicTacToe.Worker, :timer_tick, [])
-    ConCache.put(:game_state, :board_state, %{
+    ConCache.put(:game_state, :board, %{
       '0' => nil, '1' => nil, '2' => nil,
       '3' => nil, '4' => nil, '5' => nil,
       '6' => nil, '7' => nil, '8' => nil
       })
-    ConCache.put(:game_state, :board_votes, %{
+    ConCache.put(:game_state, :votes, %{
       '0' => 0, '1' => 0, '2' => 0,
       '3' => 0, '4' => 0, '5' => 0,
       '6' => 0, '7' => 0, '8' => 0
