@@ -42,7 +42,12 @@ defmodule TicTacToe.Worker do
   def timer_tick() do
     prev = get_value(:time_remaining)
     IO.puts prev
-    put_value(:time_remaining, prev - 1)
+    case prev do
+      prev when prev in 1..15 ->
+        put_value(:time_remaining, prev-1)
+      0 ->
+        put_value(:time_remaining, 15)
+      end
   end
   ##
   # End timer
