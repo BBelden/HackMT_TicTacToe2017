@@ -2,15 +2,15 @@ defmodule TicTacToe.GameChannel do
   use Phoenix.Channel
 
   def join("game:lobby", _message, socket) do
-    team = TicTacToe.Worker.get_value(:game_state, :team)
+    team = TicTacToe.Worker.get_value(:team)
     cond do
       team == :o -> :x
-        TicTacToe.Worker.give_value(:game_state, :team, :x)
+        TicTacToe.Worker.put_value(:team, :x)
 
       team == :x -> :o
-        TicTacToe.Worker.give_value(:game_state, :team, :o)
+        TicTacToe.Worker.put_value(:team, :o)
       end
-    IO.puts(TicTacToe.Worker.get_value(:game_state, :team))
+    IO.puts(TicTacToe.Worker.get_value(:team))
     {:ok, team, assign(socket, :team, team)}
   end
 
