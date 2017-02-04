@@ -61,4 +61,36 @@ defmodule TicTacToe.Worker do
   ##
   #
   ##
+  def reset_timer() do
+    put_value(:time_remaining, 15)
+  end
+
+  def update_board() do
+  end
+  
+  def reset_votes() do
+    ConCache.put(:game_state, :votes, %{
+      '0' => 0, '1' => 0, '2' => 0,
+      '3' => 0, '4' => 0, '5' => 0,
+      '6' => 0, '7' => 0, '8' => 0
+  end
+
+  def change_team() do
+    if (get_value(:team) == :x) do
+      put_value(:team,:o)
+    else put_value(:team,:x)
+    end
+  end
+
+  def turn_over() do
+    # update board
+    # reset votes
+    # change team 
+  end
+
+
+
+  ##
+  #
+  ##
 end
