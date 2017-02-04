@@ -1,5 +1,6 @@
 defmodule TicTacToe do
   use Application
+  use GenServer
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
@@ -10,8 +11,8 @@ defmodule TicTacToe do
     children = [
       # Start the endpoint when the application starts
       supervisor(TicTacToe.Endpoint, []),
-      # Start your own worker by calling: TicTacToe.Worker.start_link(arg1, arg2, arg3)
-      # worker(TicTacToe.Worker, [arg1, arg2, arg3]),
+      worker(ConCache, [[], [name: :game_state]]),
+      worker(TicTacToe.Worker, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

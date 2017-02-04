@@ -52,6 +52,27 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // Finally, pass the token on connect as below. Or remove it
 // from connect if you don't care about authentication.
 
+// timer stuff
+
+
+function turnTimer(start) {
+  var base = this
+  base.timeleft = start
+  $("#timer").html(base.timeleft)
+  base.maxtime = 15
+  base.tick = function() {
+    console.log("tick")
+    base.timeleft--
+    $("#timer").html(base.timeleft)
+  }
+  base.reset = function() {
+    base.timeleft = base.maxtime
+  }
+  base.run = function() {
+    setInterval(base.tick, 1000)
+  }
+}
+
 socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
@@ -60,13 +81,18 @@ channel.join()
   .receive("ok", resp => {
     let teamName = resp.toUpperCase()
     $('#teamAssigned').addClass(`is${teamName}`).html(teamName)
+    let mytimer = new turnTimer(15)
+    mytimer.run()
   })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 $('.board .button').on('click', function(evt) {
-  let selectedIdx = $(evt.currentTarget).data('idx')
-  console.log(selectedIdx)
-  channel.push("vote", {vote: selectedIdx})
+  if (!$(this).hasClass("disabledButton")) {
+    let selectedIdx = $(evt.currentTarget).data('idx')
+    console.log(selectedIdx)
+    channel.push("vote", {vote: selectedIdx})
+    $(".button").addClass("disabledButton")
+  }
 })
 
 export default socket

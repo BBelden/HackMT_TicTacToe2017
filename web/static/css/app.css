@@ -31,3 +31,12 @@
 .isO{
 	color: blue;
 }
+
+.disabledButton {
+	cursor: not-allowed;
+}
+
+/* Timer CSS */
+#timerDiv {
+	font-size: 20pt;
+}

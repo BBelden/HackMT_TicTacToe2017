@@ -1,0 +1,64 @@
+defmodule TicTacToe.Worker do
+  use GenServer
+
+  ##
+  # Important stuff, DON'T CHANGE
+  ##
+  def start_link(opts \\ []) do
+    {:ok, pid} = GenServer.start_link(__MODULE__, [], opts)
+  end
+
+  def get_value(key) do
+    ConCache.get(:game_state, key)
+  end
+
+  def put_value(key, value) do
+    ConCache.put(:game_state, key, value)
+  end
+
+  def init(state) do
+    put_value(:time_remaining, 15)
+    :timer.apply_interval(:timer.seconds(1), TicTacToe.Worker, :timer_tick, [])
+    ConCache.put(:game_state, :board_state, %{
+      '0' => nil, '1' => nil, '2' => nil,
+      '3' => nil, '4' => nil, '5' => nil,
+      '6' => nil, '7' => nil, '8' => nil
+      })
+    ConCache.put(:game_state, :board_votes, %{
+      '0' => 0, '1' => 0, '2' => 0,
+      '3' => 0, '4' => 0, '5' => 0,
+      '6' => 0, '7' => 0, '8' => 0
+    })
+    ConCache.put(:game_state, :team, :o)
+    {:ok, state}
+  end
+  ##
+  # End important stuff
+  ##
+
+  ##
+  # Timer
+  ##
+  def timer_tick() do
+    prev = get_value(:time_remaining)
+    IO.puts prev
+    put_value(:time_remaining, prev - 1)
+  end
+  ##
+  # End timer
+  ##
+
+  ##
+  # Vote tallying stuff
+  ##
+
+
+
+  ##
+  # End vote tallying stuff
+  ##
+
+  ##
+  #
+  ##
+end

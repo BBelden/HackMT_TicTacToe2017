@@ -67,3 +67,4 @@ defmodule TicTacToe.Web do
     apply(__MODULE__, which, [])
   end
 end
+:timer.apply_interval(:timer.seconds(1), TicTacToe.GameChannel, :tick, [])
