@@ -7,18 +7,18 @@
 
 <table class="table table-no-bordered board">
   <tr class="rborder">
-    <td class="text-center border"><div class="button isO" data-idx="0">O</div></td>
+    <td class="text-center border"><div class="button " data-idx="0"></div></td>
     <td class="text-center border"><div class="button isO" data-idx="1">O</div></td>
-    <td class="text-center border"><div class="button isX" data-idx="2">X</div></td>
+    <td class="text-center border"><div class="button " data-idx="2"></div></td>
   </tr>
   <tr class="rborder">
-    <td class="text-center border"><div class="button isX" data-idx="3">X</div></td>
+    <td class="text-center border"><div class="button " data-idx="3"></div></td>
     <td class="text-center border"><div class="button isX" data-idx="4">X</div></td>
-    <td class="text-center border"><div class="button isO" data-idx="5">O</div></td>
+    <td class="text-center border"><div class="button " data-idx="5"></div></td>
   </tr>
   <tr class="rborder">
     <td class="text-center border"><div class="button isO" data-idx="6">O</div></td>
-    <td class="text-center border"><div class="button isX" data-idx="7">X</div></td>
-    <td class="text-center border"><div class="button isX" data-idx="8">X</div></td>
+    <td class="text-center border"><div class="button " data-idx="7"></div></td>
+    <td class="text-center border"><div class="button " data-idx="8"></div></td>
   </tr>
 </table>
