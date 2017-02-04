@@ -3,8 +3,12 @@
     border: 0px;
     border-top: 0px;
 }
-.border{
+.button{
 	font-size: 30pt;
+	cursor: pointer;
+	padding: 5px;
+	background: grey;
+	border-radius: 15px;
 }
 .border:not(:first-child){
     border-left: 2px solid black;
@@ -24,6 +28,6 @@
 	color: red;
 }
 
-.isY{
+.isO{
 	color: blue;
 }

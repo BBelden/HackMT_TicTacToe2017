@@ -1,22 +1,22 @@
 <div class="jumbotron">
   <h2><%= gettext "Welcome to %{name}!", name: "MMO Tic-Tac-Toe" %></h2>
-  <p class="lead">You are on team: X or O</p>
+  <p class="lead">Oou are on team: <span id="teamAssigned"></span></p>
 </div>
 
 <table class="table table-no-bordered">
   <tr class="rborder">
-    <td class="text-center border isY">Y</td>
-    <td class="text-center border isY">Y</td>
-    <td class="text-center border isX">X</td>
+    <td class="text-center border"><div class="button isO">O</div></td>
+    <td class="text-center border"><div class="button isO">O</div></td>
+    <td class="text-center border"><div class="button isX">X</div></td>
   </tr>
   <tr class="rborder">
-    <td class="text-center border isX">X</td>
-    <td class="text-center border isX">X</td>
-    <td class="text-center border isY">Y</td>
+    <td class="text-center border"><div class="button isX">X</div></td>
+    <td class="text-center border"><div class="button isX">X</div></td>
+    <td class="text-center border"><div class="button isO">O</div></td>
   </tr>
   <tr class="rborder">
-    <td class="text-center border isY">Y</td>
-    <td class="text-center border isX">X</td>
-    <td class="text-center border isX">X</td>
+    <td class="text-center border"><div class="button isO">O</div></td>
+    <td class="text-center border"><div class="button isX">X</div></td>
+    <td class="text-center border"><div class="button isX">X</div></td>
   </tr>
 </table>

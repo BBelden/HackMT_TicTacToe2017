@@ -56,7 +56,11 @@ socket.connect()
 // Now that you are connected, you can join channels with a topic:
 let channel = socket.channel("game:lobby", {})
 channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
+  .receive("ok", resp => { 
+    console.log("Joined successfully", resp)
+    document.getElementById('teamAssigned').innerHTML = resp.toUpperCase()
+    document.getElementById('teamAssigned').className = "is" + resp.toUpperCase()
+  })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 export default socket
