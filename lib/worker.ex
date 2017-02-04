@@ -35,6 +35,8 @@ defmodule TicTacToe.Worker do
     })
     ConCache.put(:game_state, :team, :o)
     {:ok, state}
+    put_value(:board_full,false)
+    put_value(:winner,nil)
   end
   ##
   # End important stuff
@@ -78,15 +80,26 @@ defmodule TicTacToe.Worker do
   end
 
   def update_board() do
-    highest = :votes
+    highest = get_value(:votes)
       |> Enum.sort(fn({_, lhs}, {_, rhs}) ->
           lhs >= rhs
         end)
       |> List.first
-    if (get_value(:team) == :x)do
+    if get_value(:team) == :x do
       put_value(:board,%{highest => 'X'})
     else
       put_value(:board,%{highest => 'O'})
+    end
+    if get_value(:board,0) != nil and
+       get_value(:board,1) != nil and
+       get_value(:board,2) != nil and
+       get_value(:board,3) != nil and
+       get_value(:board,4) != nil and
+       get_value(:board,5) != nil and
+       get_value(:board,6) != nil and
+       get_value(:board,7) != nil and
+       get_value(:board,8) != nil do
+      put_value(:board_full,true)
     end
   end
 
@@ -99,9 +112,17 @@ defmodule TicTacToe.Worker do
   end
 
   def change_team() do
-    if (get_value(:team) == :x) do
+    if get_value(:team) == :x do
       put_value(:team,:o)
     else put_value(:team,:x)
+    end
+  end
+  
+  def is_game_over() do
+    if get_value(:board_full) == true do
+      ##
+    else if get_value(:winner) != nil  
+      ##
     end
   end
 
@@ -110,6 +131,7 @@ defmodule TicTacToe.Worker do
     reset_votes()
     change_team()
     reset_timer()
+    is_game_over()
   end
 
   ##
