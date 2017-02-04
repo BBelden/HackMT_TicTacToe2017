@@ -27,7 +27,7 @@ defmodule TicTacToe.Worker do
       0 => nil, 1 => nil, 2 => nil,
       3 => nil, 4 => nil, 5 => nil,
       6 => nil, 7 => nil, 8 => nil
-      })
+    })
     put_value(:votes, %{
       0 => 0, 1 => 0, 2 => 555555,
       3 => 0, 4 => 0, 5 => 0,
@@ -45,13 +45,13 @@ defmodule TicTacToe.Worker do
   ##
   def timer_tick() do
     prev = get_value(:time_remaining)
-    TicTacToe.GameChannel.tick()
     case prev do
       prev when prev in 1..15 ->
+        TicTacToe.GameChannel.tick(prev-1)
         put_value(:time_remaining, prev-1)
       0 ->
         turn_over()
-      end
+    end
   end
   ##
   # End timer
