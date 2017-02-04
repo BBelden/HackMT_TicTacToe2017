@@ -9,4 +9,7 @@ defmodule TicTacToe.GameChannel do
   def join("game:" <> _private_room_id, _params, _socket) do
     {:error, %{reason: "unauthorized"}}
   end
+  def tick do
+    IO.inspect(:tick)
+  end
 end
