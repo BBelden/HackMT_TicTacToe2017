@@ -58,14 +58,8 @@ socket.connect()
 let channel = socket.channel("game:lobby", {})
 channel.join()
   .receive("ok", resp => {
-<<<<<<< HEAD
-    console.log("Joined Team:", resp)
-    document.getElementById('teamAssigned').innerHTML = resp.toUpperCase()
-    document.getElementById('teamAssigned').className = "is" + resp.toUpperCase()
-=======
     let teamName = resp.toUpperCase()
     $('#teamAssigned').addClass(`is${teamName}`).html(teamName)
->>>>>>> 64a5ffab4e771c5b0f4307d7e116baa185c9cc72
   })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
