@@ -87,9 +87,13 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 $('.board .button').on('click', function(evt) {
-  let selectedIdx = $(evt.currentTarget).data('idx')
-  console.log(selectedIdx)
-  channel.push("vote", {vote: selectedIdx})
+  if (!$(this).hasClass("myvote")) {
+    let selectedIdx = $(evt.currentTarget).data('idx')
+    console.log(selectedIdx)
+    channel.push("vote", {vote: selectedIdx})
+    $(".myvote").removeClass("myvote")
+    $(this).addClass("myvote")
+  }
 })
 
 export default socket

@@ -32,6 +32,10 @@
 	color: blue;
 }
 
+.myvote {
+	cursor: not-allowed;
+}
+
 /* Timer CSS */
 #timerDiv {
 	font-size: 20pt;
