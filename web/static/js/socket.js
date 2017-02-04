@@ -116,6 +116,15 @@ function resetTurn() {
   $(".isX, .isO").addClass("disabledButton")
 }
 
-$("#testbtn").click(resetTurn)
+function resetBoard() {
+  console.log("reset board")
+  theTurn = 0
+  $("#team").html(teams[theTurn]).addClass("is" + teams[theTurn]).removeClass("is" + teams[(theTurn + 1) % 2])
+  $(".button").removeClass("disabledButton").removeClass("isX").removeClass("isO").html("&nbsp;&nbsp;&nbsp;")
+  mytimer.reset()
+}
+
+$("#testturnbtn").click(resetTurn)
+$("#testboardbtn").click(resetBoard)
 
 export default socket

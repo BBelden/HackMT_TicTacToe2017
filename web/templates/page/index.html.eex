@@ -6,7 +6,8 @@
 </div>
 
 <div  class="text-center">
-<button id="testbtn">testing</button>
+	<button id="testturnsbtn">testing turns</button>
+	<button id="testboardbtn">testing bord reset</button>
 </div>
 
 <table class="table table-no-bordered board">
