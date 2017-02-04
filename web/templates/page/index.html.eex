@@ -1,6 +1,6 @@
 <div class="jumbotron">
   <h2><%= gettext "Welcome to %{name}!", name: "MMO Tic-Tac-Toe" %></h2>
-  <p class="lead">Oou are on team: <span id="teamAssigned"></span></p>
+  <p class="lead">You are on team: <span id="teamAssigned"></span></p>
 </div>
 
 <table class="table table-no-bordered">
