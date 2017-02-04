@@ -75,6 +75,7 @@ function turnTimer(start) {
 
 let mytimer = new Object()
 let teams = ["X", "O"]
+let teamName = "X"
 let theTurn = 0
 
 socket.connect()
@@ -83,7 +84,7 @@ socket.connect()
 let channel = socket.channel("game:lobby", {})
 channel.join()
   .receive("ok", resp => {
-    let teamName = resp.toUpperCase()
+    teamName = resp.toUpperCase()
     $('#teamAssigned').addClass(`is${teamName}`).html(teamName)
     mytimer = new turnTimer(15)
     mytimer.run()
@@ -94,6 +95,7 @@ channel.join()
       theTurn = 1
     }
     $("#team").html(teams[theTurn]).addClass("is" + teams[theTurn])
+    // set the board
   })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
@@ -114,6 +116,9 @@ function resetTurn() {
   $("#team").html(teams[theTurn]).addClass("is" + teams[theTurn]).removeClass("is" + teams[(theTurn + 1) % 2])
   $(".button").removeClass("disabledButton")
   $(".isX, .isO").addClass("disabledButton")
+  if (teamName != teams[theTurn]) {
+    $(".button").addClass("disabledButton")
+  }
 }
 
 function resetBoard() {
