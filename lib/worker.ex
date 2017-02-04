@@ -51,7 +51,9 @@ defmodule TicTacToe.Worker do
   ##
   # Vote tallying stuff
   ##
-
+  def apply_vote(team, vote_idx) do
+    # ...
+  end
 
 
   ##
@@ -67,9 +69,9 @@ defmodule TicTacToe.Worker do
 
   def update_board() do
   end
-  
+
   def reset_votes() do
-    ConCache.put(:game_state, :votes, %{
+    put_value(:votes, %{
       '0' => 0, '1' => 0, '2' => 0,
       '3' => 0, '4' => 0, '5' => 0,
       '6' => 0, '7' => 0, '8' => 0
@@ -86,7 +88,7 @@ defmodule TicTacToe.Worker do
   def turn_over() do
     # update board
     # reset votes
-    # change team 
+    # change team
   end
 
 
