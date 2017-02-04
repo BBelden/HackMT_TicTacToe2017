@@ -11,6 +11,7 @@ defmodule TicTacToe do
     children = [
       # Start the endpoint when the application starts
       supervisor(TicTacToe.Endpoint, []),
+      worker(ConCache, [[], [name: :game_state]]),
       worker(TicTacToe.Worker, [])
     ]
 
