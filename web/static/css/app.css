@@ -31,3 +31,8 @@
 .isO{
 	color: blue;
 }
+
+/* Timer CSS */
+#timerDiv {
+	font-size: 20pt;
+}

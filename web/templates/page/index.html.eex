@@ -3,6 +3,8 @@
   <p class="lead">You are on team: <span id="teamAssigned"></span></p>
 </div>
 
+<div class="container text-center" id="timerDiv">Vote Timer: <span id="timer"></span></div>
+
 <table class="table table-no-bordered board">
   <tr class="rborder">
     <td class="text-center border"><div class="button isO" data-idx="0">O</div></td>
