@@ -9,6 +9,7 @@
 	padding: 5px;
 	background: grey;
 	border-radius: 15px;
+	height: 67px;
 }
 .border:not(:first-child){
     border-left: 2px solid black;
@@ -34,9 +35,4 @@
 
 .disabledButton {
 	cursor: not-allowed;
-}
-
-/* Timer CSS */
-#timerDiv {
-	font-size: 20pt;
 }

@@ -1,13 +1,17 @@
 <div class="jumbotron">
   <h2><%= gettext "Welcome to %{name}!", name: "MMO Tic-Tac-Toe" %></h2>
   <p class="lead">You are on team: <span id="teamAssigned"></span></p>
+  <p class="lead" id="timePar">Vote Timer: <span id="timer"></span></p>
+  <p class="lead" id="turnPar">Turn: <span id="team"></span></p>
 </div>
 
-<div class="container text-center" id="timerDiv">Vote Timer: <span id="timer"></span></div>
+<div  class="text-center">
+<button id="testbtn">testing</button>
+</div>
 
 <table class="table table-no-bordered board">
   <tr class="rborder">
-    <td class="text-center border"><div class="button isO" data-idx="0">O</div></td>
+    <td class="text-center border"><div class="button" data-idx="0"></div></td>
     <td class="text-center border"><div class="button isO" data-idx="1">O</div></td>
     <td class="text-center border"><div class="button isX" data-idx="2">X</div></td>
   </tr>
@@ -19,6 +23,6 @@
   <tr class="rborder">
     <td class="text-center border"><div class="button isO" data-idx="6">O</div></td>
     <td class="text-center border"><div class="button isX" data-idx="7">X</div></td>
-    <td class="text-center border"><div class="button isX" data-idx="8">X</div></td>
+    <td class="text-center border"><div class="button" data-idx="8"></div></td>
   </tr>
 </table>
