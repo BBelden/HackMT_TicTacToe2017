@@ -23,15 +23,15 @@ defmodule TicTacToe.Worker do
   def init(state) do
     put_value(:time_remaining, 15)
     :timer.apply_interval(:timer.seconds(1), TicTacToe.Worker, :timer_tick, [])
-    ConCache.put(:game_state, :board, %{
-      '0' => nil, '1' => nil, '2' => nil,
-      '3' => nil, '4' => nil, '5' => nil,
-      '6' => nil, '7' => nil, '8' => nil
+    put_value(:board, %{
+      0 => nil, 1 => nil, 2 => nil,
+      3 => nil, 4 => nil, 5 => nil,
+      6 => nil, 7 => nil, 8 => nil
       })
-    ConCache.put(:game_state, :votes, %{
-      '0' => 0, '1' => 0, '2' => 0,
-      '3' => 0, '4' => 0, '5' => 0,
-      '6' => 0, '7' => 0, '8' => 0
+    put_value(:votes, %{
+      0 => 0, 1 => 0, 2 => 0,
+      3 => 0, 4 => 0, 5 => 0,
+      6 => 0, 7 => 0, 8 => 0
     })
     ConCache.put(:game_state, :team, :o)
     {:ok, state}
@@ -45,7 +45,7 @@ defmodule TicTacToe.Worker do
   ##
   def timer_tick() do
     prev = get_value(:time_remaining)
-    #IO.puts prev
+    TicTacToe.GameChannel.tick()
     case prev do
       prev when prev in 1..15 ->
         put_value(:time_remaining, prev-1)
@@ -61,7 +61,8 @@ defmodule TicTacToe.Worker do
   # Vote tallying stuff
   ##
   def apply_vote(team, vote_idx) do
-    # ...
+    # Team?
+    # ...add vote
   end
 
 

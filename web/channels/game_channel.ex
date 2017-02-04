@@ -32,6 +32,6 @@ defmodule TicTacToe.GameChannel do
 
   end
   def tick do
-    :tick
+    nil
   end
 end
