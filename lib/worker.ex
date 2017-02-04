@@ -84,9 +84,9 @@ defmodule TicTacToe.Worker do
         end)
       |> List.first
     if (get_value(:team) == :x)do
-      put_value(:board,highest,'X')
+      put_value(:board,%{highest,'X'})
     else
-      put_value(:board,highest,'O')
+      put_value(:board,%{highest,'O'})
     end
   end
 
