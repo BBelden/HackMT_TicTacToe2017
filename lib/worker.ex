@@ -91,16 +91,10 @@ defmodule TicTacToe.Worker do
   end
 
   def turn_over() do
-<<<<<<< HEAD
     update_board()
     reset_votes()
     change_team()
     reset_timer()
-=======
-    # update board
-    # reset votes
-    # change team
->>>>>>> 6cb35a98d509bfcc272a3d9bc4ac4e6b4e359113
   end
 
   ##
