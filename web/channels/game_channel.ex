@@ -13,7 +13,7 @@ defmodule TicTacToe.GameChannel do
   def handle_in("vote", %{"vote" => vote}, socket) do
     IO.puts(vote)
     {:noreply, socket}
-
+  end
   def tick do
     IO.inspect(:tick)
   end
