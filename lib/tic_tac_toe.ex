@@ -11,8 +11,8 @@ defmodule TicTacToe do
     children = [
       # Start the endpoint when the application starts
       supervisor(TicTacToe.Endpoint, []),
-      worker(TicTacToe.Worker, []),
-      worker(ConCache, [[], [name: :game_state]])
+      worker(ConCache, [[], [name: :game_state]]),
+      worker(TicTacToe.Worker, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
