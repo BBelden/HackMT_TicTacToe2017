@@ -2,7 +2,15 @@ defmodule TicTacToe.GameChannel do
   use Phoenix.Channel
 
   def join("game:lobby", _message, socket) do
-    team = Enum.random([:x, :o])
+    team = TicTacToe.Worker.get_value(:game_state, :team)
+    cond do
+      team == :o -> :x
+        TicTacToe.Worker.give_value(:game_state, :team, :x)
+
+      team == :x -> :o
+        TicTacToe.Worker.give_value(:game_state, :team, :o)
+      end
+    IO.puts(TicTacToe.Worker.get_value(:game_state, :team))
     {:ok, team, assign(socket, :team, team)}
   end
 
@@ -15,6 +23,6 @@ defmodule TicTacToe.GameChannel do
     {:noreply, socket}
   end
   def tick do
-    IO.inspect(:tick)
+    :tick
   end
 end
