@@ -1,1 +1,29 @@
 /* This file is for your main application css. */
+.table, .table th, .table td, .table tr, .fixed-table-container{
+    border: 0px;
+    border-top: 0px;
+}
+.border{
+	font-size: 30pt;
+}
+.border:not(:first-child){
+    border-left: 2px solid black;
+}
+
+.rborder{
+	height: 100px;
+}
+.rborder:not(:first-child){
+	border-top: 2px solid black;
+}
+.rborder:first-child{
+	border-top: 0;
+}
+
+.isX{
+	color: red;
+}
+
+.isY{
+	color: blue;
+}

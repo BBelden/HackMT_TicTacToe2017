@@ -3,20 +3,20 @@
   <p class="lead">You are on team: X or O</p>
 </div>
 
-<div class="container>
-  <div class="row">
-    <div class="col-sm-4 bg-primary text-white text-center">0</div>
-    <div class="col-sm-4">1</div> 
-    <div class="col-sm-4">2</div>
-  </div>
-  <div class="row">
-    <div class="col-sm-4">3</div>
-    <div class="col-sm-4">4</div>
-    <div class="col-sm-4">5</div>
-  </div>
-  <div class="row">
-    <div class="col-sm-4">6</div>
-    <div class="col-sm-4">7</div>
-    <div class="col-sm-4">8</div>
-  </div>
-</div>
+<table class="table table-no-bordered">
+  <tr class="rborder">
+    <td class="text-center border isY">Y</td>
+    <td class="text-center border isY">Y</td>
+    <td class="text-center border isX">X</td>
+  </tr>
+  <tr class="rborder">
+    <td class="text-center border isX">X</td>
+    <td class="text-center border isX">X</td>
+    <td class="text-center border isY">Y</td>
+  </tr>
+  <tr class="rborder">
+    <td class="text-center border isY">Y</td>
+    <td class="text-center border isX">X</td>
+    <td class="text-center border isX">X</td>
+  </tr>
+</table>
