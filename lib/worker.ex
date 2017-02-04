@@ -46,7 +46,7 @@ defmodule TicTacToe.Worker do
       prev when prev in 1..15 ->
         put_value(:time_remaining, prev-1)
       0 ->
-        put_value(:time_remaining, 15)
+        turn_over()
       end
   end
   ##
