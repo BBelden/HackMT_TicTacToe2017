@@ -16,6 +16,10 @@ defmodule TicTacToe.Worker do
     ConCache.put(:game_state, key, value)
   end
 
+  def get_cache() do
+    %{':team' => get_value(:team), ':board' => get_value(:board), ':votes' => get_value(:votes), ':time_remaining' => get_value(:time_remaining)}
+  end
+
   def init(state) do
     put_value(:time_remaining, 15)
     :timer.apply_interval(:timer.seconds(1), TicTacToe.Worker, :timer_tick, [])
@@ -41,7 +45,7 @@ defmodule TicTacToe.Worker do
   ##
   def timer_tick() do
     prev = get_value(:time_remaining)
-    IO.puts prev
+    #IO.puts prev
     case prev do
       prev when prev in 1..15 ->
         put_value(:time_remaining, prev-1)
@@ -95,6 +99,7 @@ defmodule TicTacToe.Worker do
     reset_votes()
     change_team()
     reset_timer()
+
   end
 
   ##
