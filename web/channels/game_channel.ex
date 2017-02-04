@@ -19,8 +19,17 @@ defmodule TicTacToe.GameChannel do
   end
 
   def handle_in("vote", %{"vote" => vote}, socket) do
-    IO.puts(vote)
-    {:noreply, socket}
+    my_team = IO.inspect(Map.get(socket.assigns, :team))
+
+    #Check to see whether my_team is equal to turn
+    if true do
+        IO.puts("Vote: "<>to_string(vote))
+    	IO.puts("Team: "<>to_string(my_team))
+        {:reply, {:ok, %{"vote" => vote, "my_team" => my_team}}, socket}
+    else
+	{:noreply, socket}
+    end
+
   end
   def tick do
     :tick
