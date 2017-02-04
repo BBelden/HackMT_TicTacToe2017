@@ -18,7 +18,7 @@ defmodule TicTacToe.GameChannel do
     {:error, %{reason: "unauthorized"}}
   end
 
-  def handle_in("vote_idx", %{"vote_idx" => vote_idx}, socket) do
+  def handle_in("vote", %{"vote" => vote}, socket) do
     my_team = IO.inspect(Map.get(socket.assigns, :team))
     TicTacToe.Worker.apply_vote(my_team, vote)
     {:reply, {:ok, %{"vote" => vote, "my_team" => my_team}}, socket}
