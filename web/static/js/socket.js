@@ -63,4 +63,9 @@ channel.join()
   })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
+$('.board .button').on('click', function(evt) {
+  let btn = $(evt.currentTarget)
+  console.log(btn.data('idx'))
+})
+
 export default socket
