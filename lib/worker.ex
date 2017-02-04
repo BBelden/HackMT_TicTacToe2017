@@ -78,6 +78,16 @@ defmodule TicTacToe.Worker do
   end
 
   def update_board() do
+    highest = :votes
+      |> Enum.sort(fn({_, lhs}, {_, rhs}) ->
+          lhs >= rhs
+        end)
+      |> List.first
+    if (get_value(:team) == :x)do
+      put_value(:board,highest,'X')
+    else
+      put_value(:board,highest,'O')
+    end
   end
 
   def reset_votes() do
@@ -100,7 +110,6 @@ defmodule TicTacToe.Worker do
     reset_votes()
     change_team()
     reset_timer()
-
   end
 
   ##
