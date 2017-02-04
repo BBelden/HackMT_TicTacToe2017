@@ -73,6 +73,10 @@ function turnTimer(start) {
   }
 }
 
+let mytimer = new Object()
+let teams = ["X", "O"]
+let theTurn = 0
+
 socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
@@ -81,8 +85,15 @@ channel.join()
   .receive("ok", resp => {
     let teamName = resp.toUpperCase()
     $('#teamAssigned').addClass(`is${teamName}`).html(teamName)
-    let mytimer = new turnTimer(15)
+    mytimer = new turnTimer(15)
     mytimer.run()
+    if (resp.turn == "X" || 1) {
+      theTurn = 0
+    }
+    else {
+      theTurn = 1
+    }
+    $("#team").html(teams[theTurn]).addClass("is" + teams[theTurn])
   })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
@@ -94,5 +105,17 @@ $('.board .button').on('click', function(evt) {
     $(".button").addClass("disabledButton")
   }
 })
+
+// reset functions
+function resetTurn() {
+  console.log("reset")
+  mytimer.reset()
+  theTurn = (theTurn + 1) % 2
+  $("#team").html(teams[theTurn]).addClass("is" + teams[theTurn]).removeClass("is" + teams[(theTurn + 1) % 2])
+  $(".button").removeClass("disabledButton")
+  $(".isX, .isO").addClass("disabledButton")
+}
+
+$("#testbtn").click(resetTurn)
 
 export default socket
