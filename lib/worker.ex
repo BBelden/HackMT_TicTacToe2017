@@ -66,7 +66,7 @@ defmodule TicTacToe.Worker do
   ##
 
   ##
-  #
+  #  end of turn stuff
   ##
   def reset_timer() do
     put_value(:time_remaining, 15)
@@ -91,14 +91,13 @@ defmodule TicTacToe.Worker do
   end
 
   def turn_over() do
-    # update board
-    # reset votes
-    # change team
+    update_board()
+    reset_votes()
+    change_team()
+    reset_timer()
   end
 
-
-
   ##
-  #
+  #  end end of turn stuff
   ##
 end
