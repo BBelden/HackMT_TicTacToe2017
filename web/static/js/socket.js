@@ -8,6 +8,7 @@ import $ from "jquery"
 
 let socket = new Socket("/socket", {params: {token: window.userToken}})
 
+<<<<<<< Updated upstream
 // When you connect, you'll often need to authenticate the client.
 // For example, imagine you have an authentication plug, `MyAuth`,
 // which authenticates the session and assigns a `:current_user`.
@@ -75,6 +76,8 @@ function turnTimer(start) {
 }
 
 let mytimer = new Object()
+=======
+>>>>>>> Stashed changes
 let teams = ["X", "O"]
 let teamName = "X"
 let theTurn = 0
@@ -111,8 +114,15 @@ $('.board .button').on('click', function(evt) {
   }
 })
 
-channel.on("time_tick", payload => {
-	$("#timer").html(payload.time_remaining)
+channel.on("tick_state", payload => {
+  console.log(payload)
+  $("#timer").html(payload.time_remaining)
+  let teamName = payload.team.toUpperCase()
+  let teamClass = `is${teamName}`
+  let teamEl = $("#team")
+  if (!teamEl.hasClass(teamClass)) {
+    teamEl.html(teamName).addClass(teamClass)
+  }
 })
 
 

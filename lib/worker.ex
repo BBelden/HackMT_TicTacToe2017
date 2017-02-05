@@ -17,7 +17,12 @@ defmodule TicTacToe.Worker do
   end
 
   def get_cache() do
-    %{':team' => get_value(:team), ':board' => get_value(:board), ':votes' => get_value(:votes), ':time_remaining' => get_value(:time_remaining)}
+    %{
+      team: get_value(:team),
+      #board: get_value(:board),
+      #votes: get_value(:votes),
+      time_remaining: get_value(:time_remaining)
+    }
   end
 
   def init_board() do
