@@ -5,7 +5,7 @@ defmodule TicTacToe.Worker do
   # Important stuff, DON'T CHANGE
   ##
   def start_link(opts \\ []) do
-    {:ok, pid} = GenServer.start_link(__MODULE__, [], opts)
+    {:ok, _pid} = GenServer.start_link(__MODULE__, [], opts)
   end
 
   def get_value(key) do
@@ -75,9 +75,10 @@ defmodule TicTacToe.Worker do
   ##
   # Vote tallying stuff
   ##
+  # team: something something Tom did this
+  # .... belongs to user... he told me so
   def apply_vote(team, vote_idx) do
     board = get_value(:board)
-    current_turn = get_value(:team)
     # Team?
     if team == get_value(:team) do
        board_value = Map.get(board, vote_idx)
@@ -184,7 +185,7 @@ defmodule TicTacToe.Worker do
     board = get_value(:board)
     check_win()
     cond do
-      !Enum.any?(board, fn({k,v}) -> v == nil end) ->
+      !Enum.any?(board, fn({_k,v}) -> v == nil end) ->
         ## board full
         ## TODO game tie output?
         put_value(:tie,true)
