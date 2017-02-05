@@ -25,6 +25,7 @@ defmodule TicTacToe.GameChannel do
   end
 
   def tick(time_remaining) do
+    TicTacToe.Endpoint.broadcast! "game:lobby", "time_tick", %{:time_remaining => time_remaining}
     # ... send time to browser
   end
 end
