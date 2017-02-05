@@ -87,8 +87,6 @@ channel.join()
   .receive("ok", resp => {
     teamName = resp.toUpperCase()
     $('#teamAssigned').addClass(`is${teamName}`).html(teamName)
-    mytimer = new turnTimer(15)
-    mytimer.run()
     if (resp.turn == "X" || 1) {
       theTurn = 0
     }
@@ -114,7 +112,7 @@ $('.board .button').on('click', function(evt) {
 })
 
 channel.on("time_tick", payload => {
-	console.log(payload)
+	$("#timer").html(payload.time_remaining)
 })
 
 
