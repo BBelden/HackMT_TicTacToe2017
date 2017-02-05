@@ -24,30 +24,30 @@ channel.join()
     $('#teamAssigned').addClass(`is${myTeamName}`).html(myTeamName)
     $("#team").html(resp.turn).addClass("is" + resp.turn)
     // set the board
-    let currColor = teamColors[resp.team.toUpperCase()]
     if (myTeamName != resp.team.toUpperCase()) {
       $(".button").addClass("disabledButton")
     }
-    resp.board.forEach(function(e, i, arr) {
-      //console.log(i,e,arr)
-      if (e != null) {
-        $("#b" + i).html(e.toUpperCase()).addClass("is" + e.toUpperCase()).addClass("disabledButton")
-      }
-    })
-    resp.votes.forEach(function(e, i, arr) {
-      //console.log(i,e,arr)
-     // $("#b" + i).css("opacity", 4/10).css("background", currColor)
-      if (!($("#b" + i).hasClass("isX") || $("#b" + i).hasClass("isO"))) {
-        $("#b" + i).css("opacity", e/100).css("background", currColor)
-      }
-    })
-
+    show_board(resp)
   })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
-channel.on("new_msg", payload => {
-  console.log(payload)
-})
+
+function show_board(resp) {
+  let currColor = teamColors[resp.team.toUpperCase()]
+  resp.board.forEach(function(e, i, arr) {
+    //console.log(i,e,arr)
+    if (e != null) {
+      $("#b" + i).html(e.toUpperCase()).addClass("is" + e.toUpperCase()).addClass("disabledButton")
+    }
+  })
+  // resp.votes.forEach(function(e, i, arr) {
+  //   //console.log(i,e,arr)
+  //  // $("#b" + i).css("opacity", 4/10).css("background", currColor)
+  //   if (!($("#b" + i).hasClass("isX") || $("#b" + i).hasClass("isO"))) {
+  //     $("#b" + i).css("opacity", e/100).css("background", currColor)
+  //   }
+  // })
+}
 
 $('.board .button').on('click', function(evt) {
   if (!$(this).hasClass("disabledButton")) {
@@ -59,8 +59,10 @@ $('.board .button').on('click', function(evt) {
   }
 })
 
+// Handle clock tick
 channel.on("tick_state", payload => {
   console.log(payload)
+  show_board(payload)
   $("#timer").html(payload.time_remaining)
   let teamName = payload.team.toUpperCase()
   let teamClass = `is${teamName}`
@@ -110,8 +112,8 @@ function endGame() {
   $("#result").show()
 }
 
-$("#testturnbtn").click(resetTurn)
-$("#testboardbtn").click(resetBoard)
-$("#testendgamebtn").click(endGame)
+// $("#testturnbtn").click(resetTurn)
+// $("#testboardbtn").click(resetBoard)
+// $("#testendgamebtn").click(endGame)
 
 export default socket
