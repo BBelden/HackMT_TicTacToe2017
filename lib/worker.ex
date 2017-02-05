@@ -4,7 +4,6 @@ defmodule TicTacToe.Worker do
   ##
   # Important stuff, DON'T CHANGE
   ##
-  put_value(:test_time,5)
   def start_link(opts \\ []) do
     {:ok, pid} = GenServer.start_link(__MODULE__, [], opts)
   end
@@ -61,7 +60,7 @@ defmodule TicTacToe.Worker do
   def timer_tick() do
     prev = get_value(:time_remaining)
     case prev do
-      prev when prev in 1..15 ->
+      prev when prev in 1..5 ->
         TicTacToe.GameChannel.tick(prev-1)
         put_value(:time_remaining, prev-1)
       0 ->
@@ -102,7 +101,7 @@ defmodule TicTacToe.Worker do
   #  end of turn stuff
   ##
   def set_timer() do
-    put_value(:time_remaining, get_value(:test_time))
+    put_value(:time_remaining, 5)
   end
 
   @win_conditions [
