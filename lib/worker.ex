@@ -79,11 +79,9 @@ defmodule TicTacToe.Worker do
     board = get_value(:board)
     current_turn = get_value(:team)
     # Team?
-    IO.inspect(%{voting_team: current_turn, my_team: team, my_choice: vote_idx})
     if team == get_value(:team) do
        board_value = Map.get(board, vote_idx)
        if board_value == nil do
-         IO.puts "Hey! Apply Vote If Is Working"
           # ...add vote
           votes = get_value(:votes)
           votes_value = Map.get(votes, vote_idx)
@@ -136,7 +134,6 @@ defmodule TicTacToe.Worker do
     Enum.reduce_while(@win_conditions, false, fn(item, _) ->
       winner = variant_has_winner?(gb, item)
       if winner do
-        IO.puts "FINAL WINNER!!!"
         put_value(:winner, winner)
         {:halt, winner}
       else
