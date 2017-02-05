@@ -19,10 +19,15 @@ let channel = socket.channel("game:lobby", {})
 channel.join()
   .receive("ok", resp => {
     console.log(resp)
-    myTeamName = resp.team.toUpperCase()
+    myTeamName = resp.team_assignment.toUpperCase()
     $('#teamAssigned').addClass(`is${myTeamName}`).html(myTeamName)
     $("#team").html(resp.turn).addClass("is" + resp.turn)
     // set the board
+    resp.board.forEach(function(e, i, arr) {
+      //console.log(i,e,arr)
+
+    })
+
   })
   .receive("error", resp => { console.log("Unable to join", resp) })
 

@@ -26,7 +26,7 @@ defmodule TicTacToe.Worker do
   end
 
   def init_board() do
-    put_value(:teamPlayer, Enum.random([:o, :x]))
+    #put_value(:teamPlayer, Enum.random([:o, :x]))
     put_value(:team, Enum.random([:o, :x]))
     set_timer()
     put_value(:board, %{
@@ -78,9 +78,11 @@ defmodule TicTacToe.Worker do
     board = get_value(:board)
     # Team?
     IO.inspect({team, vote_idx})
+    IO.puts(team)
     if team == get_value(:team) do
        board_value = Map.get(board, vote_idx)
        if board_value == nil do
+         IO.puts "Hey! Apply Vote If Is Working"
           # ...add vote
           votes = get_value(:votes)
           votes_value = Map.get(votes, vote_idx)
