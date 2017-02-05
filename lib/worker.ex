@@ -80,27 +80,22 @@ defmodule TicTacToe.Worker do
   end
 
   def update_board() do
+    board = get_value(:board)
     highest = get_value(:votes)
       |> Enum.sort(fn({_, lhs}, {_, rhs}) ->
           lhs >= rhs
         end)
       |> List.first
     if get_value(:team) == :x do
-      put_value(:board,%{highest => 'X'})
+      board = Map.put(board,highest,:x)
     else
-      put_value(:board,%{highest => 'O'})
+      board = Map.put(board,highest,:o)
     end
-    if get_value(:board,0) != nil and
-       get_value(:board,1) != nil and
-       get_value(:board,2) != nil and
-       get_value(:board,3) != nil and
-       get_value(:board,4) != nil and
-       get_value(:board,5) != nil and
-       get_value(:board,6) != nil and
-       get_value(:board,7) != nil and
-       get_value(:board,8) != nil do
+    ## be smarter here
+    if !Enum.any?(board, fn({k,v}) -> v == nil end) do
       put_value(:board_full,true)
     end
+    ## check for winner here
   end
 
   def reset_votes() do
@@ -121,7 +116,7 @@ defmodule TicTacToe.Worker do
   def is_game_over() do
     if get_value(:board_full) == true do
       ##
-    else if get_value(:winner) != nil  
+      ## else if get_value(:winner) != nil  
       ##
     end
   end
