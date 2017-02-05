@@ -18,7 +18,7 @@ defmodule TicTacToe.Worker do
 
   def get_cache() do
     %{
-      team: get_value(:team),
+      teamTurn: get_value(:team),
       #board: get_value(:board),
       #votes: get_value(:votes),
       time_remaining: get_value(:time_remaining)
@@ -26,6 +26,8 @@ defmodule TicTacToe.Worker do
   end
 
   def init_board() do
+    put_value(:teamPlayer, Enum.random([:o, :x]))
+    put_value(:team, Enum.random([:o, :x]))
     set_timer()
     put_value(:board, %{
       0 => nil, 1 => nil, 2 => nil,
