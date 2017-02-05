@@ -78,6 +78,7 @@ defmodule TicTacToe.Worker do
     board = get_value(:board)
     # Team?
     IO.inspect({team, vote_idx})
+    IO.puts(team)
     if team == get_value(:team) do
        board_value = Map.get(board, vote_idx)
        if board_value == nil do
