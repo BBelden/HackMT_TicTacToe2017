@@ -34,9 +34,10 @@ defmodule TicTacToe.Worker do
       6 => 0, 7 => 0, 8 => 0
     })
     ConCache.put(:game_state, :team, :o)
-    {:ok, state}
     put_value(:board_full,false)
     put_value(:winner,nil)
+
+    {:ok, state}
   end
   ##
   # End important stuff
