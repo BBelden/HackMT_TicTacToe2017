@@ -40,13 +40,13 @@ function show_board(resp) {
       $("#b" + i).html(e.toUpperCase()).addClass("is" + e.toUpperCase()).addClass("disabledButton")
     }
   })
-  // resp.votes.forEach(function(e, i, arr) {
-  //   //console.log(i,e,arr)
-  //  // $("#b" + i).css("opacity", 4/10).css("background", currColor)
-  //   if (!($("#b" + i).hasClass("isX") || $("#b" + i).hasClass("isO"))) {
-  //     $("#b" + i).css("opacity", e/100).css("background", currColor)
-  //   }
-  // })
+   resp.votes.forEach(function(e, i, arr) {
+     //console.log(i,e,arr)
+     //$("#b" + i).css("opacity", 4/10).css("background", currColor)
+     if (!($("#b" + i).hasClass("isX") || $("#b" + i).hasClass("isO"))) {
+       $("#b" + i).html(e)
+     }
+   })
 }
 
 $('.board .button').on('click', function(evt) {
@@ -55,11 +55,11 @@ $('.board .button').on('click', function(evt) {
     console.log(selectedIdx)
     channel.push("vote", {vote: selectedIdx})
     $(".button").addClass("disabledButton")
-    $(this).html("<div class=\"myVote\">" + myTeamName + "</div>")
+    $(this).addClass("myVote" + myTeamName)
   }
 })
 
-// Handle clock tick
+// Handle clock tick-
 channel.on("tick_state", payload => {
   console.log(payload)
   show_board(payload)
@@ -71,6 +71,7 @@ channel.on("tick_state", payload => {
     teamEl.html(teamName).removeClass("isX").removeClass("isO").addClass(teamClass)
   }
   if (payload.time_remaining == 15) {
+    $(".myVote" + myTeamName).removeClass("myVote" + myTeamName)
     if (myTeamName == teamName) {
       $(".button").removeClass("disabledButton")
       $(".isX").addClass("disabledButton")
