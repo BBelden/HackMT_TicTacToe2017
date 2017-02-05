@@ -18,7 +18,7 @@ defmodule TicTacToe.Worker do
 
   def get_cache() do
     %{
-      teamTurn: get_value(:team),
+      team: get_value(:team),
       #board: get_value(:board),
       #votes: get_value(:votes),
       time_remaining: get_value(:time_remaining)
