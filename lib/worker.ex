@@ -75,7 +75,19 @@ defmodule TicTacToe.Worker do
   ##
   def apply_vote(team, vote_idx) do
     # Team?
-    # ...add vote
+    IO.puts("Hello!")
+    if team == get_value(:team) do
+       board_value = Map.get(get_value(:board), vote_idx)
+       IO.puts("Checking for superimposition")
+       if board_value == nil do
+       	  # ...add vote
+	  IO.puts("Adding Vote")
+	  votes = get_value(:votes)
+	  votes_value = Map.get(votes, vote_idx)
+       	  Map.put(votes, vote_idx, votes_value + 1)
+       end
+    end
+    
   end
 
 
