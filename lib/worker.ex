@@ -19,8 +19,8 @@ defmodule TicTacToe.Worker do
   def get_cache() do
     %{
       team: get_value(:team),
-      #board: get_value(:board),
-      #votes: get_value(:votes),
+      board: Map.values(get_value(:board)),
+      votes: Map.values(get_value(:votes)),
       time_remaining: get_value(:time_remaining)
     }
   end
@@ -46,6 +46,7 @@ defmodule TicTacToe.Worker do
 
   def init(state) do
     init_board()
+    #IO.inspect Map.to_list(get_value(:board))
     :timer.apply_interval(:timer.seconds(1), TicTacToe.Worker, :timer_tick, [])
     {:ok, state}
   end
