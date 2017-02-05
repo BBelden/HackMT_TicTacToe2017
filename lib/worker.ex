@@ -31,7 +31,7 @@ defmodule TicTacToe.Worker do
     put_value(:team, :x)
     set_timer()
     put_value(:board, %{
-      0 => :x, 1 => :x, 2 => nil,
+      0 => nil, 1 => nil, 2 => nil,
       3 => nil, 4 => nil, 5 => nil,
       6 => nil, 7 => nil, 8 => nil
     })
@@ -40,7 +40,6 @@ defmodule TicTacToe.Worker do
       3 => 0, 4 => 0, 5 => 0,
       6 => 0, 7 => 0, 8 => 0
     })
-    put_value(:board_full, false)
     put_value(:winner, false)
     put_value(:tie, false)
   end
@@ -186,11 +185,9 @@ defmodule TicTacToe.Worker do
     winner = check_win()
     cond do
       !Enum.any?(board, fn({_k,v}) -> v == nil end) ->
-        ## board full
-        ## TODO game tie output?
+        ## board is full but no winner: draw
         put_value(:tie, true)
         game_over()
-        #get_value(:winner) != nil ->
       winner ->
         ## winner!
         put_value(:winner, winner)
