@@ -8,19 +8,19 @@
 
 <table class="table table-no-bordered board">
   <tr class="rborder">
-    <td class="text-center border"><div class="button" data-idx="0">&nbsp;&nbsp;&nbsp;</div></td>
-    <td class="text-center border"><div class="button" data-idx="1">&nbsp;&nbsp;&nbsp;</div></td>
-    <td class="text-center border"><div class="button" data-idx="2">&nbsp;&nbsp;&nbsp;</div></td>
+    <td class="text-center border"><div class="button" id="b0" data-idx="0">&nbsp;&nbsp;&nbsp;</div></td>
+    <td class="text-center border"><div class="button" id="b1" data-idx="1">&nbsp;&nbsp;&nbsp;</div></td>
+    <td class="text-center border"><div class="button" id="b2" data-idx="2">&nbsp;&nbsp;&nbsp;</div></td>
   </tr>
   <tr class="rborder">
-    <td class="text-center border"><div class="button" data-idx="3">&nbsp;&nbsp;&nbsp;</div></td>
-    <td class="text-center border"><div class="button" data-idx="4">&nbsp;&nbsp;&nbsp;</div></td>
-    <td class="text-center border"><div class="button" data-idx="5">&nbsp;&nbsp;&nbsp;</div></td>
+    <td class="text-center border"><div class="button" id="b3" data-idx="3">&nbsp;&nbsp;&nbsp;</div></td>
+    <td class="text-center border"><div class="button" id="b4" data-idx="4">&nbsp;&nbsp;&nbsp;</div></td>
+    <td class="text-center border"><div class="button" id="b5" data-idx="5">&nbsp;&nbsp;&nbsp;</div></td>
   </tr>
   <tr class="rborder">
-    <td class="text-center border"><div class="button" data-idx="6">&nbsp;&nbsp;&nbsp;</div></td>
-    <td class="text-center border"><div class="button" data-idx="7">&nbsp;&nbsp;&nbsp;</div></td>
-    <td class="text-center border"><div class="button" data-idx="8">&nbsp;&nbsp;&nbsp;</div></td>
+    <td class="text-center border"><div class="button" id="b6" data-idx="6">&nbsp;&nbsp;&nbsp;</div></td>
+    <td class="text-center border"><div class="button" id="b7" data-idx="7">&nbsp;&nbsp;&nbsp;</div></td>
+    <td class="text-center border"><div class="button" id="b8" data-idx="8">&nbsp;&nbsp;&nbsp;</div></td>
   </tr>
 </table>
 
