@@ -23,8 +23,8 @@ defmodule TicTacToe.GameChannel do
     TicTacToe.Worker.apply_vote(my_team, vote)
     {:reply, {:ok, %{"vote" => vote, "my_team" => my_team}}, socket}
   end
-  
-  def tick do
-    nil
+
+  def tick(time_remaining) do
+    # ... send time to browser
   end
 end

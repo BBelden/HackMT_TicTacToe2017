@@ -27,14 +27,16 @@ defmodule TicTacToe.Worker do
       0 => nil, 1 => nil, 2 => nil,
       3 => nil, 4 => nil, 5 => nil,
       6 => nil, 7 => nil, 8 => nil
-      })
+    })
     put_value(:votes, %{
-      0 => 10, 1 => 11, 2 => 12,
-      3 => 13, 4 => 14, 5 => 15,
-      6 => 16, 7 => 17, 8 => 18
+      0 => 0, 1 => 0, 2 => 555555,
+      3 => 0, 4 => 0, 5 => 0,
+      6 => 0, 7 => 0, 8 => 0
     })
     ConCache.put(:game_state, :team, :o)
     {:ok, state}
+    put_value(:board_full,false)
+    put_value(:winner,nil)
   end
   ##
   # End important stuff
@@ -45,13 +47,13 @@ defmodule TicTacToe.Worker do
   ##
   def timer_tick() do
     prev = get_value(:time_remaining)
-    TicTacToe.GameChannel.tick()
     case prev do
       prev when prev in 1..15 ->
+        TicTacToe.GameChannel.tick(prev-1)
         put_value(:time_remaining, prev-1)
       0 ->
         turn_over()
-      end
+    end
   end
   ##
   # End timer
@@ -78,6 +80,22 @@ defmodule TicTacToe.Worker do
   end
 
   def update_board() do
+    board = get_value(:board)
+    highest = get_value(:votes)
+      |> Enum.sort(fn({_, lhs}, {_, rhs}) ->
+          lhs >= rhs
+        end)
+      |> List.first
+    if get_value(:team) == :x do
+      board = Map.put(board,highest,:x)
+    else
+      board = Map.put(board,highest,:o)
+    end
+    ## be smarter here
+    if !Enum.any?(board, fn({k,v}) -> v == nil end) do
+      put_value(:board_full,true)
+    end
+    ## check for winner here
   end
 
   def reset_votes() do
@@ -89,9 +107,17 @@ defmodule TicTacToe.Worker do
   end
 
   def change_team() do
-    if (get_value(:team) == :x) do
+    if get_value(:team) == :x do
       put_value(:team,:o)
     else put_value(:team,:x)
+    end
+  end
+
+  def is_game_over() do
+    if get_value(:board_full) == true do
+      ##
+      ## else if get_value(:winner) != nil
+      ##
     end
   end
 
@@ -100,7 +126,7 @@ defmodule TicTacToe.Worker do
     reset_votes()
     change_team()
     reset_timer()
-    update_board()
+    is_game_over()
   end
 
   ##
