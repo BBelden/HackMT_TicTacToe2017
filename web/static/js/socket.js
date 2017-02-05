@@ -11,6 +11,7 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 let teams = ["X", "O"]
 let myTeamName = "X"
 let theTurn = 0
+let teamColors = {"X": "red", "O": "blue"}
 
 socket.connect()
 
@@ -23,6 +24,7 @@ channel.join()
     $('#teamAssigned').addClass(`is${myTeamName}`).html(myTeamName)
     $("#team").html(resp.turn).addClass("is" + resp.turn)
     // set the board
+    let currColor = teamColors[resp.team.toUpperCase()]
     if (myTeamName != resp.team.toUpperCase()) {
       $(".button").addClass("disabledButton")
     }
@@ -30,6 +32,13 @@ channel.join()
       //console.log(i,e,arr)
       if (e != null) {
         $("#b" + i).html(e.toUpperCase()).addClass("is" + e.toUpperCase()).addClass("disabledButton")
+      }
+    })
+    resp.votes.forEach(function(e, i, arr) {
+      //console.log(i,e,arr)
+     // $("#b" + i).css("opacity", 4/10).css("background", currColor)
+      if (!($("#b" + i).hasClass("isX") || $("#b" + i).hasClass("isO"))) {
+        $("#b" + i).css("opacity", e/100).css("background", currColor)
       }
     })
 
