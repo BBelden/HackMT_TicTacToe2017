@@ -26,7 +26,7 @@ defmodule TicTacToe.Worker do
   end
 
   def init_board() do
-    put_value(:teamPlayer, Enum.random([:o, :x]))
+    #put_value(:teamPlayer, Enum.random([:o, :x]))
     put_value(:team, Enum.random([:o, :x]))
     set_timer()
     put_value(:board, %{
@@ -153,12 +153,14 @@ defmodule TicTacToe.Worker do
         end)
       |> List.first
     IO.inspect(elem(highest,0))
-    board = if get_value(:team) == :x do
-      Map.put(board,elem(highest,0),:x)
-    else
-      Map.put(board,elem(highest,0),:o)
+    if elem(highest,0) != 0 do
+      board = if get_value(:team) == :x do
+        Map.put(board,elem(highest,0),:x)
+      else
+        Map.put(board,elem(highest,0),:o)
+      end
+      put_value(:board,board)
     end
-    put_value(:board,board)
   end
 
   def reset_votes() do
