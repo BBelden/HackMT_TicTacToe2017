@@ -28,7 +28,9 @@ channel.join()
     }
     resp.board.forEach(function(e, i, arr) {
       //console.log(i,e,arr)
-
+      if (e != null) {
+        $("#b" + i).html(e.toUpperCase()).addClass("is" + e.toUpperCase()).addClass("disabledButton")
+      }
     })
 
   })
