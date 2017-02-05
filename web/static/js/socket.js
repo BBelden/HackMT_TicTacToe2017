@@ -104,19 +104,4 @@ channel.on("tick_state", payload => {
   }
 })
 
-
-function resetBoard() {
-  console.log("reset board")
-  $("#result").hide()
-  $("#winnerSpan").removeClass("isX").removeClass("isO")
-  theTurn = 0
-  $("#team").html(teams[theTurn]).addClass("is" + teams[theTurn]).removeClass("is" + teams[(theTurn + 1) % 2])
-  $(".button").removeClass("myVote" + myTeamName).removeClass("disabledButton").removeClass("isX").removeClass("isO").html("&nbsp;&nbsp;&nbsp;")
-  mytimer.reset()
-}
-
-function endGame() {
-  $("#result").show()
-}
-
 export default socket
