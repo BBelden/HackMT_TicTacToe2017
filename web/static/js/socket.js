@@ -58,6 +58,12 @@ channel.on("tick_state", payload => {
     else {
       $(".button").addClass("disabledButton")
     }
+    $(".button").each(function(i) {
+        if (!($(this).hasClass("isX") || $(this).hasClass("isO"))) {
+          $(this).html("&nbsp;&nbsp;&nbsp;")
+        }
+      }
+    )
   }
 })
 
