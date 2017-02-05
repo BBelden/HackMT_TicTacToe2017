@@ -21,7 +21,9 @@ defmodule TicTacToe.Worker do
       team: get_value(:team),
       board: Map.values(get_value(:board)),
       votes: Map.values(get_value(:votes)),
-      time_remaining: get_value(:time_remaining)
+      time_remaining: get_value(:time_remaining),
+      winner: get_value(:winner),
+      tie: get_value(:tie)
     }
   end
 
