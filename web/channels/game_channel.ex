@@ -12,7 +12,7 @@ defmodule TicTacToe.GameChannel do
         TicTacToe.Worker.put_value(:teamPlayer, :o)
       end
     IO.puts(TicTacToe.Worker.get_value(:teamPlayer))
-    {:ok, [Map.values(TicTacToe.Worker.get_cache())], socket}
+    {:ok, TicTacToe.Worker.get_cache(), socket}
   end
 
   def join("game:" <> _private_room_id, _params, _socket) do
