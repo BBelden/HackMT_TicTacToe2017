@@ -142,17 +142,21 @@ defmodule TicTacToe.Worker do
   end
 
   def update_board() do
+    IO.puts "updating board"
     board = get_value(:board)
+    IO.inspect(board)
     highest = get_value(:votes)
       |> Enum.sort(fn({_, lhs}, {_, rhs}) ->
           lhs >= rhs
         end)
       |> List.first
+    IO.inspect(elem(highest,0))
     board = if get_value(:team) == :x do
-      Map.put(board,highest,:x)
+      Map.put(board,elem(highest,0),:x)
     else
-      Map.put(board,highest,:o)
+      Map.put(board,elem(highest,0),:o)
     end
+    put_value(:board,board)
   end
 
   def reset_votes() do
