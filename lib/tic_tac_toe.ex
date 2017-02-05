@@ -12,7 +12,7 @@ defmodule TicTacToe do
       # Start the endpoint when the application starts
       supervisor(TicTacToe.Endpoint, []),
       worker(ConCache, [[], [name: :game_state]]),
-      worker(TicTacToe.Worker, [])
+      #worker(TicTacToe.Worker, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

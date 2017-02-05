@@ -86,10 +86,10 @@ defmodule TicTacToe.Worker do
           lhs >= rhs
         end)
       |> List.first
-    if get_value(:team) == :x do
-      board = Map.put(board,highest,:x)
+    board = if get_value(:team) == :x do
+      Map.put(board,highest,:x)
     else
-      board = Map.put(board,highest,:o)
+      Map.put(board,highest,:o)
     end
     ## be smarter here
     if !Enum.any?(board, fn({k,v}) -> v == nil end) do
