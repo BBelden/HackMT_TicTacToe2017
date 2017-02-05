@@ -62,7 +62,8 @@ function turnTimer(start) {
   base.maxtime = 15
   base.tick = function() {
     console.log("tick")
-    base.timeleft--
+    base.timeleft = Math.min(0, base.timeleft - 1)
+    //base.timeleft--
     $("#timer").html(base.timeleft)
   }
   base.reset = function() {
@@ -99,6 +100,10 @@ channel.join()
   })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
+channel.on("new_msg", payload => {
+  console.log(payload)
+})
+
 $('.board .button').on('click', function(evt) {
   if (!$(this).hasClass("disabledButton")) {
     let selectedIdx = $(evt.currentTarget).data('idx')
@@ -107,6 +112,11 @@ $('.board .button').on('click', function(evt) {
     $(".button").addClass("disabledButton")
   }
 })
+
+channel.on("time_tick", payload => {
+	console.log(payload)
+})
+
 
 // reset functions
 function resetTurn() {
