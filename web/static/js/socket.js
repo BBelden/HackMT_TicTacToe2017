@@ -19,7 +19,7 @@ let channel = socket.channel("game:lobby", {})
 channel.join()
   .receive("ok", resp => {
     console.log(resp)
-    myTeamName = resp.toUpperCase()
+    myTeamName = resp.team.toUpperCase()
     $('#teamAssigned').addClass(`is${myTeamName}`).html(myTeamName)
     $("#team").html(resp.turn).addClass("is" + resp.turn)
     // set the board
