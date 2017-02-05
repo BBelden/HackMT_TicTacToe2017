@@ -42,6 +42,7 @@ defmodule TicTacToe.Worker do
     ConCache.put(:game_state, :team, :o)
     put_value(:board_full,false)
     put_value(:winner,false)
+    put_value(:tie,false)
   end
 
   def init(state) do
@@ -180,6 +181,11 @@ defmodule TicTacToe.Worker do
     end
   end
 
+  def game_over( ) do
+
+    init_board()
+  end
+
   def is_game_over() do
     board = get_value(:board)
     check_win()
@@ -187,12 +193,13 @@ defmodule TicTacToe.Worker do
       !Enum.any?(board, fn({k,v}) -> v == nil end) ->
         ## board full
         ## TODO game tie output?
-        init_board()
+        put_value(:tie,true)
+        game_over()
         #get_value(:winner) != nil ->
       get_value(:winner) ->
         ## winner!
         ## TODO game winner output?
-        init_board()
+        game_over()
       true ->
         true
     end
