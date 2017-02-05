@@ -75,10 +75,11 @@ defmodule TicTacToe.Worker do
   # Vote tallying stuff
   ##
   def apply_vote(team, vote_idx) do
+    board = get_value(:board)
     # Team?
-    IO.puts("Applying vote!")
+    IO.inspect({team, vote_idx})
     if team == get_value(:team) do
-       board_value = Map.get(get_value(:board), vote_idx)
+       board_value = Map.get(board, vote_idx)
        if board_value == nil do
           # ...add vote
           votes = get_value(:votes)
