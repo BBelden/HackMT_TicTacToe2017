@@ -67,6 +67,11 @@
 	vertical-align: middle;
 }
 
-.myVote {
-	text-opacity: 0.5;
+.myVoteX {
+	background: red;
+	color: white;
+}
+.myVoteO {
+	background: blue;
+	color: white;
 }
