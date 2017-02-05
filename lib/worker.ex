@@ -20,9 +20,8 @@ defmodule TicTacToe.Worker do
     %{':team' => get_value(:team), ':board' => get_value(:board), ':votes' => get_value(:votes), ':time_remaining' => get_value(:time_remaining)}
   end
 
-  def init(state) do
+  def init_board() do
     put_value(:time_remaining, 15)
-    :timer.apply_interval(:timer.seconds(1), TicTacToe.Worker, :timer_tick, [])
     put_value(:board, %{
       0 => nil, 1 => nil, 2 => nil,
       3 => nil, 4 => nil, 5 => nil,
@@ -36,7 +35,11 @@ defmodule TicTacToe.Worker do
     ConCache.put(:game_state, :team, :o)
     put_value(:board_full,false)
     put_value(:winner,nil)
+  end
 
+  def init(state) do
+    :timer.apply_interval(:timer.seconds(1), TicTacToe.Worker, :timer_tick, [])
+    init_board()
     {:ok, state}
   end
   ##
@@ -92,10 +95,6 @@ defmodule TicTacToe.Worker do
     else
       Map.put(board,highest,:o)
     end
-    ## be smarter here
-    if !Enum.any?(board, fn({k,v}) -> v == nil end) do
-      put_value(:board_full,true)
-    end
     ## check for winner here
   end
 
@@ -115,10 +114,14 @@ defmodule TicTacToe.Worker do
   end
 
   def is_game_over() do
-    if get_value(:board_full) == true do
-      ##
-      ## else if get_value(:winner) != nil
-      ##
+    cond do
+      !Enum.any?(board, fn({k,v}) -> v == nil end ->
+        ## board full
+        ## TODO game tie output?
+        init_board()
+      get_value(:winner) != nil ->
+        ## winner!
+        init_board()
     end
   end
 
