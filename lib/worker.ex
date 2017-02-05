@@ -17,11 +17,16 @@ defmodule TicTacToe.Worker do
   end
 
   def get_cache() do
-    %{':team' => get_value(:team), ':board' => get_value(:board), ':votes' => get_value(:votes), ':time_remaining' => get_value(:time_remaining)}
+    %{
+      team: get_value(:team),
+      #board: get_value(:board),
+      #votes: get_value(:votes),
+      time_remaining: get_value(:time_remaining)
+    }
   end
 
   def init_board() do
-    put_value(:time_remaining, 15)
+    set_timer()
     put_value(:board, %{
       0 => nil, 1 => nil, 2 => nil,
       3 => nil, 4 => nil, 5 => nil,
@@ -79,7 +84,7 @@ defmodule TicTacToe.Worker do
   ##
   #  end of turn stuff
   ##
-  def reset_timer() do
+  def set_timer() do
     put_value(:time_remaining, 15)
   end
 
@@ -172,7 +177,7 @@ defmodule TicTacToe.Worker do
     update_board()
     reset_votes()
     change_team()
-    reset_timer()
+    set_timer()
     is_game_over()
   end
 
