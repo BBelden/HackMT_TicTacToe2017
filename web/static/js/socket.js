@@ -48,6 +48,16 @@ channel.on("tick_state", payload => {
   if (!teamEl.hasClass(teamClass)) {
     teamEl.html(teamName).removeClass("isX").removeClass("isO").addClass(teamClass)
   }
+  if (payload.time_remaining == 15) {
+    if (myTeamName == teamName) {
+      $(".button").removeClass("disabledButton")
+      $(".isX").addClass("disabledButton")
+      $(".isO").addClass("disabledButton")
+    }
+    else {
+      $(".button").addClass("disabledButton")
+    }
+  }
 })
 
 
