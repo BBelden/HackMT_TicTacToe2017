@@ -35,13 +35,13 @@ defmodule TicTacToe.Worker do
       6 => nil, 7 => nil, 8 => nil
     })
     put_value(:votes, %{
-      0 => 0, 1 => 0, 2 => 555555,
+      0 => 0, 1 => 0, 2 => 0,
       3 => 0, 4 => 0, 5 => 0,
       6 => 0, 7 => 0, 8 => 0
     })
     ConCache.put(:game_state, :team, :o)
     put_value(:board_full,false)
-    put_value(:winner,nil)
+    put_value(:winner,false)
   end
 
   def init(state) do
