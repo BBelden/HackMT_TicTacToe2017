@@ -151,12 +151,14 @@ defmodule TicTacToe.Worker do
         end)
       |> List.first
     IO.inspect(elem(highest,0))
-    board = if get_value(:team) == :x do
-      Map.put(board,elem(highest,0),:x)
-    else
-      Map.put(board,elem(highest,0),:o)
+    if elem(highest,0) != 0 do
+      board = if get_value(:team) == :x do
+        Map.put(board,elem(highest,0),:x)
+      else
+        Map.put(board,elem(highest,0),:o)
+      end
+      put_value(:board,board)
     end
-    put_value(:board,board)
   end
 
   def reset_votes() do
