@@ -12,6 +12,7 @@ let teams = ["X", "O"]
 let myTeamName = "X"
 let theTurn = 0
 let teamColors = {"X": "red", "O": "blue"}
+let gameOver = false;
 
 socket.connect()
 
@@ -35,14 +36,11 @@ channel.join()
 function show_board(resp) {
   let currColor = teamColors[resp.team.toUpperCase()]
   resp.board.forEach(function(e, i, arr) {
-    //console.log(i,e,arr)
     if (e != null) {
       $("#b" + i).html(e.toUpperCase()).addClass("is" + e.toUpperCase()).addClass("disabledButton")
     }
   })
    resp.votes.forEach(function(e, i, arr) {
-     //console.log(i,e,arr)
-     //$("#b" + i).css("opacity", 4/10).css("background", currColor)
      if (!($("#b" + i).hasClass("isX") || $("#b" + i).hasClass("isO"))) {
        $("#b" + i).html(e)
      }
@@ -87,18 +85,25 @@ channel.on("tick_state", payload => {
       }
     )
   }
+  if (payload.winner && !gameOver) {
+    gameOver = true
+    $("#winnerSpan").addClass("is" + payload.winner.toUpperCase()).html(payload.winner.toUpperCase() + " WINS!")
+    $("#result").show()
+  }
+  else if (payload.tie && !gameOver) {
+    gameOver = true
+    $("#winnerSpan").html("BOTH TEAM KNOW HOW THIS GAME WORKS")
+    $("#result").show()
+  }
+  else if (gameOver && !payload.tie && !payload.winner) {
+    gameOver = false;
+    $("#result").hide()
+    $("#winnerSpan").removeClass("isX").removeClass("isO")
+    $("#team").html(teams[theTurn]).addClass("is" + teams[theTurn]).removeClass("is" + teams[(theTurn + 1) % 2])
+    $(".button").removeClass("myVote" + myTeamName).removeClass("disabledButton").removeClass("isX").removeClass("isO").html("&nbsp;&nbsp;&nbsp;")
+  }
 })
 
-
-// reset functions
-function resetTurn(teamTurn = "X") {
-  console.log("reset")
-  $(".button").removeClass("disabledButton")
-  $(".isX, .isO").addClass("disabledButton")
-  if (myTeamName != teamTurn) {
-    $(".button").addClass("disabledButton")
-  }
-}
 
 function resetBoard() {
   console.log("reset board")
@@ -113,9 +118,5 @@ function resetBoard() {
 function endGame() {
   $("#result").show()
 }
-
-// $("#testturnbtn").click(resetTurn)
-// $("#testboardbtn").click(resetBoard)
-// $("#testendgamebtn").click(endGame)
 
 export default socket
