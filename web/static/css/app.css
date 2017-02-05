@@ -66,3 +66,7 @@
 	height: 100%;
 	vertical-align: middle;
 }
+
+.myVote {
+	text-opacity: 0.5;
+}

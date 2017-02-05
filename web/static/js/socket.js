@@ -36,6 +36,7 @@ $('.board .button').on('click', function(evt) {
     console.log(selectedIdx)
     channel.push("vote", {vote: selectedIdx})
     $(".button").addClass("disabledButton")
+    $(this).html("<div class=\"myVote\">" + myTeamName + "</div>")
   }
 })
 
