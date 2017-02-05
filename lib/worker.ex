@@ -31,7 +31,7 @@ defmodule TicTacToe.Worker do
     put_value(:team, :x)
     set_timer()
     put_value(:board, %{
-      0 => :x, 1 => :x, 2 => nil,
+      0 => nil, 1 => nil, 2 => nil,
       3 => nil, 4 => nil, 5 => nil,
       6 => nil, 7 => nil, 8 => nil
     })
