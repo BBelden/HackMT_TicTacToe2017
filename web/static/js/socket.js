@@ -113,6 +113,11 @@ $('.board .button').on('click', function(evt) {
   }
 })
 
+channel.on("time_tick", payload => {
+	console.log(payload)
+})
+
+
 // reset functions
 function resetTurn() {
   console.log("reset")
