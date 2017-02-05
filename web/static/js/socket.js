@@ -9,7 +9,7 @@ import $ from "jquery"
 let socket = new Socket("/socket", {params: {token: window.userToken}})
 
 let teams = ["X", "O"]
-let teamName = "X"
+let myTeamName = "X"
 let theTurn = 0
 
 socket.connect()
@@ -18,15 +18,10 @@ socket.connect()
 let channel = socket.channel("game:lobby", {})
 channel.join()
   .receive("ok", resp => {
-    teamName = resp.toUpperCase()
-    $('#teamAssigned').addClass(`is${teamName}`).html(teamName)
-    if (resp.turn == "X" || 1) {
-      theTurn = 0
-    }
-    else {
-      theTurn = 1
-    }
-    $("#team").html(teams[theTurn]).addClass("is" + teams[theTurn])
+    console.log(resp)
+    myTeamName = resp.toUpperCase()
+    $('#teamAssigned').addClass(`is${myTeamName}`).html(myTeamName)
+    $("#team").html(resp.turn).addClass("is" + resp.turn)
     // set the board
   })
   .receive("error", resp => { console.log("Unable to join", resp) })
@@ -57,14 +52,11 @@ channel.on("tick_state", payload => {
 
 
 // reset functions
-function resetTurn() {
+function resetTurn(teamTurn = "X") {
   console.log("reset")
-  mytimer.reset()
-  theTurn = (theTurn + 1) % 2
-  $("#team").html(teams[theTurn]).addClass("is" + teams[theTurn]).removeClass("is" + teams[(theTurn + 1) % 2])
   $(".button").removeClass("disabledButton")
   $(".isX, .isO").addClass("disabledButton")
-  if (teamName != teams[theTurn]) {
+  if (myTeamName != teamTurn) {
     $(".button").addClass("disabledButton")
   }
 }
