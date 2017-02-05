@@ -24,4 +24,8 @@
   </tr>
 </table>
 
-<div class="text-center" id="result"><div id="resDiv2"><span id="resSpan">GAME OVER</span></div></div>
+<div class="text-center" id="result">
+	<div id="resDiv2">
+		<span id="resSpan">GAME OVER</span><br><span id="winnerSpan"></span>
+	</div>
+</div>
