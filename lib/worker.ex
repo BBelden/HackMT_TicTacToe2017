@@ -132,14 +132,11 @@ defmodule TicTacToe.Worker do
   end
 
   def check_win() do
-    IO.puts "checking if there's a winner"
     gb = get_value(:board)
     Enum.reduce_while(@win_conditions, false, fn(item, _) ->
       winner = variant_has_winner?(gb, item)
-      IO.inspect(winner)
       if winner do
         IO.puts "FINAL WINNER!!!"
-        IO.inspect(winner)
         put_value(:winner, winner)
         {:halt, winner}
       else
@@ -182,7 +179,7 @@ defmodule TicTacToe.Worker do
   end
 
   def game_over( ) do
-
+    :timer.sleep(15000)
     init_board()
   end
 
