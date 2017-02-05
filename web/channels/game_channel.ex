@@ -2,14 +2,14 @@ defmodule TicTacToe.GameChannel do
   use Phoenix.Channel
 
   def join("game:lobby", _message, socket) do
-    team = TicTacToe.Worker.get_value(:teamPlayer)
-    cond do
-      team == :o -> :x
-        TicTacToe.Worker.put_value(:teamPlayer, :x)
+    team = Enum.random([:o, :x])
+    #team = TicTacToe.Worker.get_value(:teamPlayer)
+    #cond do
+    #  team == :o -> :x
+    #    TicTacToe.Worker.put_value(:teamPlayer, :x)
 
-      team == :x -> :o
-        TicTacToe.Worker.put_value(:teamPlayer, :o)
-    end
+    #  team == :x -> :o
+    #    TicTacToe.Worker.put_value(:teamPlayer, :o)
     {:ok, TicTacToe.Worker.get_cache(), assign(socket, :team, team)}
   end
 
@@ -19,6 +19,7 @@ defmodule TicTacToe.GameChannel do
 
   def handle_in("vote", %{"vote" => vote}, socket) do
     my_team = Map.get(socket.assigns, :team)
+    IO.puts(my_team)
     TicTacToe.Worker.apply_vote(my_team, vote)
     {:reply, {:ok, TicTacToe.Worker.get_cache()}, socket}
   end

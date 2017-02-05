@@ -81,6 +81,7 @@ defmodule TicTacToe.Worker do
     if team == get_value(:team) do
        board_value = Map.get(board, vote_idx)
        if board_value == nil do
+         IO.puts "Hey! Apply Vote If Is Working"
           # ...add vote
           votes = get_value(:votes)
           votes_value = Map.get(votes, vote_idx)
