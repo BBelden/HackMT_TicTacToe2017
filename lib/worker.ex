@@ -26,7 +26,7 @@ defmodule TicTacToe.Worker do
   end
 
   def init_board() do
-    put_value(:teamPlayer, Enum.random([:o, :x]))
+    #put_value(:teamPlayer, Enum.random([:o, :x]))
     put_value(:team, Enum.random([:o, :x]))
     set_timer()
     put_value(:board, %{
