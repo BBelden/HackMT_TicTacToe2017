@@ -90,6 +90,45 @@ defmodule TicTacToe.Worker do
     put_value(:time_remaining, 15)
   end
 
+  @win_conditions [
+    [0, 1, 2], # 0
+    [3, 4, 5], # 1
+    [6, 7, 8], # 2
+    [0, 3, 6], # 3
+    [1, 4, 7], # 4
+    [2, 5, 8], # 5
+    [0, 4, 8], # 6
+    [2, 4, 6]  # 7
+  ]
+
+  def pluck_spaces(board, indices) do
+    Enum.map(indices, fn(x) -> Map.get(board, x) end)
+  end
+
+  def variant_has_winner?(board, indices) do
+    case pluck_spaces(board, indices) do
+      [:x, :x, :x] ->
+        :x
+      [:o, :o, :o] ->
+        :o
+      _ ->
+        false
+    end
+  end
+
+  def check_win() do
+    gb = get_value(:board)
+	  Enum.reduce_while(@win_conditions, false, fn(item, _) ->
+			winner = variant_has_winner?(gb, item)
+			if winner do
+			  #{:halt, winner}
+              put_value(:winner,winner)
+			else
+			  {:cont, false}
+			end
+		  end)
+  end
+
   def update_board() do
     board = get_value(:board)
     highest = get_value(:votes)
@@ -102,7 +141,6 @@ defmodule TicTacToe.Worker do
     else
       Map.put(board,highest,:o)
     end
-    ## check for winner here
   end
 
   def reset_votes() do
@@ -129,6 +167,8 @@ defmodule TicTacToe.Worker do
         init_board()
       get_value(:winner) != nil ->
         ## winner!
+        ## TODO game winner output?
+        check_win()
         init_board()
       true ->
         true

@@ -71,13 +71,19 @@ function resetTurn() {
 
 function resetBoard() {
   console.log("reset board")
+  $("#result").hide()
   theTurn = 0
   $("#team").html(teams[theTurn]).addClass("is" + teams[theTurn]).removeClass("is" + teams[(theTurn + 1) % 2])
   $(".button").removeClass("disabledButton").removeClass("isX").removeClass("isO").html("&nbsp;&nbsp;&nbsp;")
   mytimer.reset()
 }
 
+function endGame() {
+  $("#result").show()
+}
+
 $("#testturnbtn").click(resetTurn)
 $("#testboardbtn").click(resetBoard)
+$("#testendgamebtn").click(endGame)
 
 export default socket
