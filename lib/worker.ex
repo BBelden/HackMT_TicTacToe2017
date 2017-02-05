@@ -5,7 +5,7 @@ defmodule TicTacToe.Worker do
   # Important stuff, DON'T CHANGE
   ##
   def start_link(opts \\ []) do
-    {:ok, pid} = GenServer.start_link(__MODULE__, [], opts)
+    {:ok, _pid} = GenServer.start_link(__MODULE__, [], opts)
   end
 
   def get_value(key) do
@@ -28,8 +28,7 @@ defmodule TicTacToe.Worker do
   end
 
   def init_board() do
-    #put_value(:teamPlayer, Enum.random([:o, :x]))
-    put_value(:team, Enum.random([:o, :x]))
+    put_value(:team, :x)
     set_timer()
     put_value(:board, %{
       0 => nil, 1 => nil, 2 => nil,
@@ -41,10 +40,9 @@ defmodule TicTacToe.Worker do
       3 => 0, 4 => 0, 5 => 0,
       6 => 0, 7 => 0, 8 => 0
     })
-    ConCache.put(:game_state, :team, :o)
-    put_value(:board_full,false)
-    put_value(:winner,false)
-    put_value(:tie,false)
+    put_value(:board_full, false)
+    put_value(:winner, false)
+    put_value(:tie, false)
   end
 
   def init(state) do
@@ -77,15 +75,14 @@ defmodule TicTacToe.Worker do
   ##
   # Vote tallying stuff
   ##
+  # team: something something Tom did this
+  # .... belongs to user... he told me so
   def apply_vote(team, vote_idx) do
     board = get_value(:board)
-    current_turn = get_value(:team)
     # Team?
-    IO.inspect(%{voting_team: current_turn, my_team: team, my_choice: vote_idx})
     if team == get_value(:team) do
        board_value = Map.get(board, vote_idx)
        if board_value == nil do
-         IO.puts "Hey! Apply Vote If Is Working"
           # ...add vote
           votes = get_value(:votes)
           votes_value = Map.get(votes, vote_idx)
@@ -138,7 +135,6 @@ defmodule TicTacToe.Worker do
     Enum.reduce_while(@win_conditions, false, fn(item, _) ->
       winner = variant_has_winner?(gb, item)
       if winner do
-        IO.puts "FINAL WINNER!!!"
         put_value(:winner, winner)
         {:halt, winner}
       else
@@ -189,7 +185,7 @@ defmodule TicTacToe.Worker do
     board = get_value(:board)
     check_win()
     cond do
-      !Enum.any?(board, fn({k,v}) -> v == nil end) ->
+      !Enum.any?(board, fn({_k,v}) -> v == nil end) ->
         ## board full
         ## TODO game tie output?
         put_value(:tie,true)
@@ -198,6 +194,7 @@ defmodule TicTacToe.Worker do
       get_value(:winner) ->
         ## winner!
         ## TODO game winner output?
+
         game_over()
       true ->
         true
