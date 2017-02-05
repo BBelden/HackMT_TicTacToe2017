@@ -75,7 +75,17 @@ defmodule TicTacToe.Worker do
   ##
   def apply_vote(team, vote_idx) do
     # Team?
-    # ...add vote
+    IO.puts("Applying vote!")
+    if team == get_value(:team) do
+       board_value = Map.get(get_value(:board), vote_idx)
+       if board_value == nil do
+          # ...add vote
+          votes = get_value(:votes)
+          votes_value = Map.get(votes, vote_idx)
+          new_votes = Map.put(votes, vote_idx, votes_value + 1)
+          put_value(:votes, new_votes)
+       end
+    end
   end
 
 
@@ -118,15 +128,15 @@ defmodule TicTacToe.Worker do
 
   def check_win() do
     gb = get_value(:board)
-	  Enum.reduce_while(@win_conditions, false, fn(item, _) ->
-			winner = variant_has_winner?(gb, item)
-			if winner do
-			  #{:halt, winner}
+    Enum.reduce_while(@win_conditions, false, fn(item, _) ->
+  winner = variant_has_winner?(gb, item)
+  if winner do
+    #{:halt, winner}
               put_value(:winner,winner)
-			else
-			  {:cont, false}
-			end
-		  end)
+  else
+    {:cont, false}
+  end
+    end)
   end
 
   def update_board() do
