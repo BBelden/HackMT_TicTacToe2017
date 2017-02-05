@@ -38,8 +38,8 @@ defmodule TicTacToe.Worker do
   end
 
   def init(state) do
-    :timer.apply_interval(:timer.seconds(1), TicTacToe.Worker, :timer_tick, [])
     init_board()
+    :timer.apply_interval(:timer.seconds(1), TicTacToe.Worker, :timer_tick, [])
     {:ok, state}
   end
   ##
