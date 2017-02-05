@@ -57,7 +57,7 @@ defmodule TicTacToe.Worker do
   def timer_tick() do
     prev = get_value(:time_remaining)
     case prev do
-      prev when prev in 1..15 ->
+      prev when prev in 1..16 ->
         TicTacToe.GameChannel.tick(prev-1)
         put_value(:time_remaining, prev-1)
       0 ->
@@ -85,7 +85,7 @@ defmodule TicTacToe.Worker do
   #  end of turn stuff
   ##
   def reset_timer() do
-    put_value(:time_remaining, 15)
+    put_value(:time_remaining, 16)
   end
 
   def update_board() do
