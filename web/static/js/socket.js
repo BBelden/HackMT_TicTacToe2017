@@ -51,7 +51,7 @@ channel.on("tick_state", payload => {
   let teamClass = `is${teamName}`
   let teamEl = $("#team")
   if (!teamEl.hasClass(teamClass)) {
-    teamEl.html(teamName).addClass(teamClass)
+    teamEl.html(teamName).removeClass("isX").removeClass("isO").addClass(teamClass)
   }
 })
 
