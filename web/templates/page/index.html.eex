@@ -29,3 +29,9 @@
 		<span id="resSpan">GAME OVER</span><br><span id="winnerSpan"></span>
 	</div>
 </div>
+
+<div id="info">
+This project was developed at HackMT 2017.<br>
+It uses Elixir and Phoenix on the backend.<br>
+Github: <a href="https://github.com/hackmt/tic-tac-toe-2017">https://github.com/hackmt/tic-tac-toe-2017</a>
+</div>

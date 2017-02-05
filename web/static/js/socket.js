@@ -92,7 +92,7 @@ channel.on("tick_state", payload => {
   }
   else if (payload.tie && !gameOver) {
     gameOver = true
-    $("#winnerSpan").html("BOTH TEAM KNOW HOW THIS GAME WORKS")
+    $("#winnerSpan").html("BOTH TEAMS KNOW HOW THIS GAME WORKS")
     $("#result").show()
   }
   else if (gameOver && !payload.tie && !payload.winner) {
