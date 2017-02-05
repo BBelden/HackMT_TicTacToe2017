@@ -123,6 +123,8 @@ defmodule TicTacToe.Worker do
       get_value(:winner) != nil ->
         ## winner!
         init_board()
+      true ->
+        true
     end
   end
 
