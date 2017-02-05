@@ -55,25 +55,6 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // timer stuff
 
 
-function turnTimer(start) {
-  var base = this
-  base.timeleft = start
-  $("#timer").html(base.timeleft)
-  base.maxtime = 15
-  base.tick = function() {
-    console.log("tick")
-    base.timeleft = Math.min(0, base.timeleft - 1)
-    //base.timeleft--
-    $("#timer").html(base.timeleft)
-  }
-  base.reset = function() {
-    base.timeleft = base.maxtime
-  }
-  base.run = function() {
-    setInterval(base.tick, 1000)
-  }
-}
-
 let mytimer = new Object()
 let teams = ["X", "O"]
 let teamName = "X"
@@ -87,8 +68,6 @@ channel.join()
   .receive("ok", resp => {
     teamName = resp.toUpperCase()
     $('#teamAssigned').addClass(`is${teamName}`).html(teamName)
-    mytimer = new turnTimer(15)
-    mytimer.run()
     if (resp.turn == "X" || 1) {
       theTurn = 0
     }
@@ -114,7 +93,7 @@ $('.board .button').on('click', function(evt) {
 })
 
 channel.on("time_tick", payload => {
-	console.log(payload)
+	$("#timer").html(payload.time_remaining)
 })
 
 
