@@ -23,6 +23,9 @@ channel.join()
     $('#teamAssigned').addClass(`is${myTeamName}`).html(myTeamName)
     $("#team").html(resp.turn).addClass("is" + resp.turn)
     // set the board
+    if (myTeamName != resp.team.toUpperCase()) {
+      $(".button").addClass("disabledButton")
+    }
     resp.board.forEach(function(e, i, arr) {
       //console.log(i,e,arr)
 
