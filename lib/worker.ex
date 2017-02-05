@@ -45,11 +45,10 @@ defmodule TicTacToe.Worker do
     put_value(:tie, false)
   end
 
-  def init(state) do
+  def init(_) do
     init_board()
-    #IO.inspect Map.to_list(get_value(:board))
     :timer.apply_interval(:timer.seconds(1), TicTacToe.Worker, :timer_tick, [])
-    {:ok, state}
+    {:ok, []}
   end
   ##
   # End important stuff
@@ -135,7 +134,6 @@ defmodule TicTacToe.Worker do
     Enum.reduce_while(@win_conditions, false, fn(item, _) ->
       winner = variant_has_winner?(gb, item)
       if winner do
-        put_value(:winner, winner)
         {:halt, winner}
       else
         {:cont, false}
@@ -176,26 +174,26 @@ defmodule TicTacToe.Worker do
     end
   end
 
-  def game_over( ) do
-
+  def game_over() do
+    set_timer()
+    TicTacToe.GameChannel.tick(15)
     :timer.sleep(15000)
     init_board()
   end
 
   def is_game_over() do
     board = get_value(:board)
-    check_win()
+    winner = check_win()
     cond do
       !Enum.any?(board, fn({_k,v}) -> v == nil end) ->
         ## board full
         ## TODO game tie output?
-        put_value(:tie,true)
+        put_value(:tie, true)
         game_over()
         #get_value(:winner) != nil ->
-      get_value(:winner) ->
+      winner ->
         ## winner!
-        ## TODO game winner output?
-
+        put_value(:winner, winner)
         game_over()
       true ->
         true
