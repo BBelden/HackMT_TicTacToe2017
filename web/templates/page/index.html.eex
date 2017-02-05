@@ -5,10 +5,6 @@
   <p class="lead" id="turnPar">Turn: <span id="team"></span></p>
 </div>
 
-<div  class="text-center">
-	<button id="testturnbtn">testing turns</button>
-	<button id="testboardbtn">testing board reset</button>
-</div>
 
 <table class="table table-no-bordered board">
   <tr class="rborder">
@@ -29,3 +25,9 @@
 </table>
 
 <div class="text-center" id="result"><div id="resDiv2"><span id="resSpan">GAME OVER</span></div></div>
+
+<div  class="text-center">
+	<button id="testturnbtn">testing turns</button>
+	<button id="testboardbtn">testing board reset</button>
+	<button id="testendgamebtn">testing end game</button>
+</div>
