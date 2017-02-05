@@ -45,6 +45,7 @@ $('.board .button').on('click', function(evt) {
 })
 
 channel.on("tick_state", payload => {
+  console.log(payload)
   $("#timer").html(payload.time_remaining)
   let teamName = payload.team.toUpperCase()
   let teamClass = `is${teamName}`
