@@ -129,12 +129,14 @@ defmodule TicTacToe.Worker do
   end
 
   def check_win() do
+    IO.puts "checking if there's a winner"
     gb = get_value(:board)
     Enum.reduce_while(@win_conditions, false, fn(item, _) ->
-  winner = variant_has_winner?(gb, item)
-  if winner do
+      winner = variant_has_winner?(gb, item)
+    IO.inspect(winner)
+    if winner do
     #{:halt, winner}
-              put_value(:winner,winner)
+      put_value(:winner,winner)
   else
     {:cont, false}
   end
@@ -142,16 +144,13 @@ defmodule TicTacToe.Worker do
   end
 
   def update_board() do
-    IO.puts "updating board"
     board = get_value(:board)
-    IO.inspect(board)
     highest = get_value(:votes)
       |> Enum.sort(fn({_, lhs}, {_, rhs}) ->
           lhs >= rhs
         end)
       |> List.first
-    IO.inspect(elem(highest,0))
-    if elem(highest,0) != 0 do
+    if elem(highest,1) != 0 do
       board = if get_value(:team) == :x do
         Map.put(board,elem(highest,0),:x)
       else
@@ -178,15 +177,16 @@ defmodule TicTacToe.Worker do
 
   def is_game_over() do
     board = get_value(:board)
+    check_win()
     cond do
       !Enum.any?(board, fn({k,v}) -> v == nil end) ->
         ## board full
         ## TODO game tie output?
         init_board()
-      get_value(:winner) != nil ->
+        #get_value(:winner) != nil ->
+      get_value(:winner) ->
         ## winner!
         ## TODO game winner output?
-        check_win()
         init_board()
       true ->
         true
@@ -197,8 +197,8 @@ defmodule TicTacToe.Worker do
     update_board()
     reset_votes()
     change_team()
-    set_timer()
     is_game_over()
+    set_timer()
   end
 
   ##
