@@ -4,6 +4,7 @@ defmodule TicTacToe.Worker do
   ##
   # Important stuff, DON'T CHANGE
   ##
+  put_value(:test_time,5)
   def start_link(opts \\ []) do
     {:ok, pid} = GenServer.start_link(__MODULE__, [], opts)
   end
@@ -41,7 +42,7 @@ defmodule TicTacToe.Worker do
     })
     ConCache.put(:game_state, :team, :o)
     put_value(:board_full,false)
-    put_value(:winner,nil)
+    put_value(:winner,false)
   end
 
   def init(state) do
@@ -101,7 +102,7 @@ defmodule TicTacToe.Worker do
   #  end of turn stuff
   ##
   def set_timer() do
-    put_value(:time_remaining, 15)
+    put_value(:time_remaining, get_value(:test_time))
   end
 
   @win_conditions [
