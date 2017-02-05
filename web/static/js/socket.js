@@ -62,7 +62,7 @@ function turnTimer(start) {
   base.maxtime = 15
   base.tick = function() {
     console.log("tick")
-    base.timeleft = Math.min(0, base.timeleft - 1)
+    base.timeleft = Math.max(0, base.timeleft - 1)
     //base.timeleft--
     $("#timer").html(base.timeleft)
   }
