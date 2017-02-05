@@ -7,23 +7,25 @@
 
 <div  class="text-center">
 	<button id="testturnbtn">testing turns</button>
-	<button id="testboardbtn">testing bord reset</button>
+	<button id="testboardbtn">testing board reset</button>
 </div>
 
 <table class="table table-no-bordered board">
   <tr class="rborder">
     <td class="text-center border"><div class="button" data-idx="0">&nbsp;&nbsp;&nbsp;</div></td>
-    <td class="text-center border"><div class="button isX" data-idx="1">X</div></td>
+    <td class="text-center border"><div class="button" data-idx="1">&nbsp;&nbsp;&nbsp;</div></td>
     <td class="text-center border"><div class="button" data-idx="2">&nbsp;&nbsp;&nbsp;</div></td>
   </tr>
   <tr class="rborder">
-    <td class="text-center border"><div class="button " data-idx="3">&nbsp;&nbsp;&nbsp;</div></td>
-    <td class="text-center border"><div class="button isX" data-idx="4">X</div></td>
-    <td class="text-center border"><div class="button " data-idx="5">&nbsp;&nbsp;&nbsp;</div></td>
+    <td class="text-center border"><div class="button" data-idx="3">&nbsp;&nbsp;&nbsp;</div></td>
+    <td class="text-center border"><div class="button" data-idx="4">&nbsp;&nbsp;&nbsp;</div></td>
+    <td class="text-center border"><div class="button" data-idx="5">&nbsp;&nbsp;&nbsp;</div></td>
   </tr>
   <tr class="rborder">
-    <td class="text-center border"><div class="button isO" data-idx="6">O</div></td>
+    <td class="text-center border"><div class="button" data-idx="6">&nbsp;&nbsp;&nbsp;</div></td>
     <td class="text-center border"><div class="button" data-idx="7">&nbsp;&nbsp;&nbsp;</div></td>
     <td class="text-center border"><div class="button" data-idx="8">&nbsp;&nbsp;&nbsp;</div></td>
   </tr>
 </table>
+
+<div class="text-center" id="result"><div id="resDiv2"><span id="resSpan">GAME OVER</span></div></div>

@@ -36,3 +36,33 @@
 .disabledButton {
 	cursor: not-allowed;
 }
+
+#result {
+	position: absolute;
+	display: none;
+	z-index: 100;
+	background: rgba(255,255,255,0.75);
+	top: 10%;
+	bottom: 10%;
+	left: 10%;
+	right: 10%;
+	border-radius: 100px;
+}
+
+#resDiv2 {
+	display: table;
+	margin:auto;
+	position:absolute;
+	text-align: center;
+	vertical-align: middle;
+	top: 0; left: 0; bottom:0; right:0; 
+	width: 100%;
+}
+
+#resSpan {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	vertical-align: middle;
+}
