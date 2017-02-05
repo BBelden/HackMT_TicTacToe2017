@@ -114,8 +114,9 @@ defmodule TicTacToe.Worker do
   end
 
   def is_game_over() do
+    board = get_value(:board)
     cond do
-      !Enum.any?(board, fn({k,v}) -> v == nil end ->
+      !Enum.any?(board, fn({k,v}) -> v == nil end) ->
         ## board full
         ## TODO game tie output?
         init_board()
