@@ -177,6 +177,7 @@ defmodule TicTacToe.Worker do
   end
 
   def game_over( ) do
+
     :timer.sleep(15000)
     init_board()
   end
